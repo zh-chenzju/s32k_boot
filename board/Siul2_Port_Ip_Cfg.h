@@ -98,7 +98,7 @@ extern "C"{
 /*! @brief Definitions for BOARD_InitPins Functional Group */
 
 /*! @brief User number of configured pins */
-#define NUM_OF_CONFIGURED_PINS0 46
+#define NUM_OF_CONFIGURED_PINS0 47
 
 #define PORT_START_SEC_CONFIG_DATA_UNSPECIFIED
 #include "Port_MemMap.h"
@@ -146,6 +146,8 @@ extern const Siul2_Port_Ip_PinSettingsConfig g_pin_mux_InitConfigArr0[NUM_OF_CON
 #define Vbat_12V_AD_PORT        PTD_L_HALF
 #define Motor_PWM_CTR_PIN       11u
 #define Motor_PWM_CTR_PORT      PTC_H_HALF
+#define LED_CTR_PIN             1u
+#define LED_CTR_PORT            PTB_H_HALF
 
 /*==================================================================================================
                                            ENUMS

@@ -54,5 +54,5 @@ void pit_500_ms_task(void){
 	// can报文周期发送
 	can_senddata();
 
-	LOG_INFO("[%d] APP task is running!\r\n", Get_SysTicks());
+	LOG_INFO("[%d] Boot task is running!\r\n", Get_SysTicks());
 }

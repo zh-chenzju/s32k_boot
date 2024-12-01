@@ -219,6 +219,7 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/src&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/src/BSP&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/src/RTT&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/src/FLS&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${BASE_PLATFORMSDK_S32K3}/header/&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${BASE_PLATFORMSDK_S32K3}/include/&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PLATFORM_PLATFORMSDK_S32K3}/include/&quot;"/>
@@ -756,10 +757,10 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 	<storageModule moduleId="com.nxp.s32ds.cle.uct.internal.core.toolchainScriptProfile">
-		<COND_TOOLCHAIN_COMPONENTS_OPTION>COPY=platform.driver.siul2_dio;platform.driver.pit;platform.driver.clock;platform.driver.osif;platform.driver.emios_mcl;platform.driver.FlexCAN;platform.driver.IntCtrl_Ip;platform.driver.cache;platform.driver.Clock_Ip_ReferencePoints;platform.driver.Lpuart_Lin;platform.driver.emios_pwm;platform.driver.siul2_port;platform.driver.dma;platform.driver.lpspi;platform.driver.adc_sar;platform.driver.Rm</COND_TOOLCHAIN_COMPONENTS_OPTION>
+		<COND_TOOLCHAIN_COMPONENTS_OPTION>COPY=platform.driver.siul2_dio;platform.driver.pit;platform.driver.clock;platform.driver.osif;platform.driver.emios_mcl;platform.driver.c40;platform.driver.FlexCAN;platform.driver.IntCtrl_Ip;platform.driver.cache;platform.driver.Clock_Ip_ReferencePoints;platform.driver.Lpuart_Lin;platform.driver.emios_pwm;platform.driver.siul2_port;platform.driver.dma;platform.driver.lpspi;platform.driver.adc_sar;platform.driver.Rm</COND_TOOLCHAIN_COMPONENTS_OPTION>
 	</storageModule>
 	<storageModule moduleId="com.nxp.s32ds.cle.uct.core">
-		<sdkComponents>platform.driver.clock;platform.driver.rte_mcu;platform.driver.det;platform.driver.osif;platform.driver.siul2_port;platform.driver.rte_port;platform.driver.FlexCAN;platform.driver.rte_can;platform.driver.IntCtrl_Ip;platform.driver.siul2_dio;platform.driver.rte_dio;platform.driver.pit;platform.driver.rte_gpt;platform.driver.dma;platform.driver.rte_mcl;platform.driver.cache;platform.driver.Clock_Ip_ReferencePoints;platform.driver.Rm;platform.driver.rte_rm;platform.driver.rte_lin;platform.driver.Lpuart_Lin;platform.driver.lpspi;platform.driver.rte_spi;platform.driver.adc_sar;platform.driver.rte_adc;platform.driver.emios_pwm;platform.driver.rte_pwm;platform.driver.emios_mcl</sdkComponents>
+		<sdkComponents>platform.driver.clock;platform.driver.rte_mcu;platform.driver.det;platform.driver.osif;platform.driver.siul2_port;platform.driver.rte_port;platform.driver.FlexCAN;platform.driver.rte_can;platform.driver.IntCtrl_Ip;platform.driver.siul2_dio;platform.driver.rte_dio;platform.driver.pit;platform.driver.rte_gpt;platform.driver.dma;platform.driver.rte_mcl;platform.driver.cache;platform.driver.Clock_Ip_ReferencePoints;platform.driver.Rm;platform.driver.rte_rm;platform.driver.rte_lin;platform.driver.Lpuart_Lin;platform.driver.lpspi;platform.driver.rte_spi;platform.driver.adc_sar;platform.driver.rte_adc;platform.driver.emios_pwm;platform.driver.rte_pwm;platform.driver.emios_mcl;platform.driver.c40</sdkComponents>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

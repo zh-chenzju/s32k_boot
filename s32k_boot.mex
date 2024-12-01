@@ -45,6 +45,7 @@
                <pin_label pin_num="13" pin_signal="PTE4" label="SPI_NCS1" identifier="SPI_NCS1"/>
                <pin_label pin_num="39" pin_signal="PTA31" label="SPI_NCS2" identifier="SPI_NCS2"/>
                <pin_label pin_num="93" pin_signal="PTC27" label="Motor_PWM_CTR" identifier="Motor_PWM_CTR"/>
+               <pin_label pin_num="110" pin_signal="PTB17" label="LED_CTR" identifier="LED_CTR"/>
             </pin_labels>
          </pins_profile>
          <functions_list>
@@ -251,6 +252,11 @@
                      </pin_features>
                   </pin>
                   <pin peripheral="eMIOS_1" signal="emios_1_ch_9_h" pin_num="66" pin_signal="PTC16">
+                     <pin_features>
+                        <pin_feature name="direction" value="OUTPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="SIUL2" signal="gpio, 49" pin_num="110" pin_signal="PTB17">
                      <pin_features>
                         <pin_feature name="direction" value="OUTPUT"/>
                      </pin_features>
@@ -692,6 +698,21 @@
                   <data type="Version">1.0.0</data>
                </feature>
             </dependency>
+            <dependency resourceType="SWComponent" resourceId="platform.driver.c40" description="工具链/IDE工程中未找到c40。工程不会被编译！" problem_level="2" source="Peripherals">
+               <feature name="enabled" evaluation="equal">
+                  <data type="Boolean">true</data>
+               </feature>
+            </dependency>
+            <dependency resourceType="SWComponent" resourceId="platform.driver.c40" description="工具链/IDE工程不支持c40版本。所需值: ${required_value}, 实际值: ${actual_value}. 工程可能没有被正确编译。" problem_level="1" source="Peripherals">
+               <feature name="version" evaluation="equivalent">
+                  <data type="Version">1.0.0</data>
+               </feature>
+            </dependency>
+            <dependency resourceType="Tool" resourceId="Clocks" description="外围设备工具需要 Clocks 工具，但它已被禁用。" problem_level="2" source="Peripherals">
+               <feature name="enabled" evaluation="equal">
+                  <data>true</data>
+               </feature>
+            </dependency>
          </dependencies>
          <generated_project_files>
             <file path="generate/include/Adc_Sar_Ip_Cfg.h" update_enabled="true"/>
@@ -700,6 +721,7 @@
             <file path="generate/include/Axbs_Ip_Cfg.h" update_enabled="true"/>
             <file path="generate/include/Axbs_Ip_Cfg_Defines.h" update_enabled="true"/>
             <file path="generate/include/Axbs_Ip_PBcfg.h" update_enabled="true"/>
+            <file path="generate/include/C40_Ip_Cfg.h" update_enabled="true"/>
             <file path="generate/include/CDD_Rm_Cfg.h" update_enabled="true"/>
             <file path="generate/include/CDD_Rm_Ipw_Cfg.h" update_enabled="true"/>
             <file path="generate/include/CDD_Rm_Ipw_PBcfg.h" update_enabled="true"/>
@@ -757,6 +779,7 @@
             <file path="generate/include/modules.h" update_enabled="true"/>
             <file path="generate/src/Adc_Sar_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Axbs_Ip_PBcfg.c" update_enabled="true"/>
+            <file path="generate/src/C40_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/CDD_Rm_Cfg.c" update_enabled="true"/>
             <file path="generate/src/CDD_Rm_Ipw_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/CDD_Rm_PBcfg.c" update_enabled="true"/>
@@ -6219,6 +6242,44 @@
                               </array>
                            </struct>
                         </array>
+                     </config_set>
+                  </instance>
+                  <instance name="C40_Ip" uuid="f40ea160-6fbe-4228-8429-d8e08b614e0b" type="C40_Ip" type_id="C40_Ip" mode="ip" enabled="true" comment="" custom_name_enabled="false" editing_lock="false">
+                     <config_set name="C40_Ip">
+                        <setting name="Name" value="C40_Ip"/>
+                        <struct name="FlsConfigSet">
+                           <setting name="Name" value="C40ConfigSet"/>
+                           <array name="FlsStartFlashAccessNotif"/>
+                           <array name="FlsFinishedFlashAccessNotif"/>
+                        </struct>
+                        <struct name="FlsGeneral">
+                           <setting name="Name" value="C40General"/>
+                           <setting name="FlsEnableDevAssert" value="false"/>
+                           <setting name="FlsSectorSetLockApi" value="getFeature(`FEATURE_FLS_INTERNAL_SET_LOCK_SECTOR`)"/>
+                           <setting name="FlsECCCheck" value="false"/>
+                           <setting name="FlsECCHandlingProtectionHook" value="false"/>
+                           <setting name="FlsEraseVerificationEnabled" value="false"/>
+                           <setting name="FlsWriteVerificationEnabled" value="false"/>
+                           <setting name="FlsTimeoutSupervisionEnabled" value="true"/>
+                           <setting name="FlsTimeoutMethod" value="OSIF_COUNTER_DUMMY"/>
+                           <setting name="FlsAsyncWriteTimeout" value="2147483647"/>
+                           <setting name="FlsAsyncEraseTimeout" value="2147483647"/>
+                           <setting name="FlsSyncWriteTimeout" value="2147483647"/>
+                           <setting name="FlsSyncEraseTimeout" value="2147483647"/>
+                           <setting name="FlsAbortTimeout" value="32767"/>
+                        </struct>
+                        <struct name="AutosarExt">
+                           <setting name="Name" value="AutosarExt"/>
+                           <setting name="FlsEnableUserModeSupport" value="false"/>
+                           <setting name="FlsSynchronizeCache" value="false"/>
+                           <setting name="FlsDataErrorSuppression" value="false"/>
+                           <setting name="FlsBlock4PipeSelect" value="FLS_COMMAND_PIPE_0"/>
+                        </struct>
+                        <struct name="FlsPublishedInformation">
+                           <setting name="Name" value="FlsPublishedInformation"/>
+                           <setting name="FlsErasedValue" value="4294967295"/>
+                           <setting name="FlsECCValue" value="1427461397"/>
+                        </struct>
                      </config_set>
                   </instance>
                </instances>

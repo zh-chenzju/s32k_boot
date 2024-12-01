@@ -37,9 +37,54 @@
 #include "SEGGER_RTT.h"
 #include "rtt_log.h"
 
-#define FXOSC_CLOCK_FREQ   16000000U
+#include "pFlsCtrl.h"
 
-uint8 gpio_state;
+#define NEED_JUMP_APP (1U)
+#define NOTNEED_JUMP_APP (0U)
+
+#define APP_START_ADDRESS (0x00500800)
+
+#define	STDBYRAM_START		0x20400000
+#define	STDBYRAM_END		0x20407FFF
+#define STDBYRAM_SIZE		(STDBYRAM_END - STDBYRAM_START)
+
+void init_ram(void)
+{
+	uint32_t	cnt;
+	uint64_t	*pDest;
+
+    cnt = (( uint32_t)(STDBYRAM_SIZE)) / 8U;
+    pDest = (uint64_t *)(STDBYRAM_START);
+    while (cnt--)
+    {
+		*pDest = (uint64_t)0x00;
+		pDest++;
+    }
+}
+
+void jump_to_application(unsigned int appEntry, unsigned int appStack)
+{
+    static void (*jump_to_application)(void);
+    static uint32_t stack_pointer;
+    /*把应用程序入口地址赋值给函数指针*/
+    jump_to_application = (void (*)(void))appEntry;
+    stack_pointer = appStack;
+    /* 重新定向中断向量表 */
+    S32_SCB->VTOR = (uint32_t)APP_START_ADDRESS;
+    /* 设置栈指针  */
+    __asm volatile ("MSR msp, %0\n" : : "r" (stack_pointer) : "sp");
+    __asm volatile ("MSR psp, %0\n" : : "r" (stack_pointer) : "sp");
+    /*跳转*/
+    jump_to_application();
+}
+
+typedef void (*AppAddr)(void);
+void Boot_JumpToApp(void)
+{
+	AppAddr resetHandle = (AppAddr)(*(uint32*)(0x00500800 + 4));
+
+	(resetHandle)();
+}
 
 int main(void)
 {
@@ -68,18 +113,51 @@ int main(void)
 
 	// LIN init
 	main_lin_init();
-	// CAN init
+//	// CAN init
 	main_can_init();
-	// SPI init
+//	// SPI init
 	main_spi_init();
-	// ADC init
+//	// ADC init
 	main_adc_init();
-	// PWM init
+//	// PWM init
 	main_pwm_init();
-	// PIT init
+//	// PIT init
 	main_pit_init();
 
-    while( 1 ){
+	unsigned char Need2App = NEED_JUMP_APP;
+
+	 if (PFLASH_SUCCESS == PflsIint()) {
+	 	LOG_DEBUG("[%d] FLS Init Success!\r\n", Get_SysTicks());
+
+	 	if (PFLASH_SUCCESS != clearLock()) {
+	 		LOG_ERROR("[%d] FLS Clear Lock Failed!\r\n", Get_SysTicks());
+	 	}
+	 	LOG_DEBUG("[%d] FLS Clear Lock Success!\r\n", Get_SysTicks());
+
+	 	UPDATE_STATE CurrState = checkUpdateFlag();
+	 	LOG_DEBUG("[%d] Update CurrState = %d\r\n", Get_SysTicks(), CurrState);
+
+	 	if (UPDATE_SUCESS_JUST_A == CurrState) {
+	 		Need2App = NEED_JUMP_APP;
+	 		LOG_DEBUG("[%d] Need Jump APP!\r\n", Get_SysTicks());
+	 	}
+     }
+
+	uint32_t appEntry, appStack;
+
+    if (NEED_JUMP_APP == Need2App) {
+		/* 清空ECC */
+		init_ram();
+
+		/* 执行跳转 */
+//		SuspendAllInterrupts();
+		Pit_Ip_DisableChannelInterrupt(0, 0);
+        appStack = *(uint32_t*)(APP_START_ADDRESS);
+        appEntry = *(uint32_t*)(APP_START_ADDRESS + 4);
+        jump_to_application(appEntry, appStack);
+    }
+
+	while( 1 ){
 
     }
 }

@@ -152,6 +152,7 @@ BOARD_InitPins:
   - {pin_num: '48', peripheral: LPSPI0, signal: lpspi0_sout, pin_signal: PTB4, direction: OUTPUT}
   - {pin_num: '93', peripheral: eMIOS_1, signal: emios_1_ch_4_h, pin_signal: PTC27, direction: OUTPUT}
   - {pin_num: '66', peripheral: eMIOS_1, signal: emios_1_ch_9_h, pin_signal: PTC16, direction: OUTPUT}
+  - {pin_num: '110', peripheral: SIUL2, signal: 'gpio, 49', pin_signal: PTB17, direction: OUTPUT}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */

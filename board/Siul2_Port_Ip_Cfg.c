@@ -152,6 +152,7 @@ BOARD_InitPins:
   - {pin_num: '48', peripheral: LPSPI0, signal: lpspi0_sout, pin_signal: PTB4, direction: OUTPUT}
   - {pin_num: '93', peripheral: eMIOS_1, signal: emios_1_ch_4_h, pin_signal: PTC27, direction: OUTPUT}
   - {pin_num: '66', peripheral: eMIOS_1, signal: emios_1_ch_9_h, pin_signal: PTC16, direction: OUTPUT}
+  - {pin_num: '110', peripheral: SIUL2, signal: 'gpio, 49', pin_signal: PTB17, direction: OUTPUT}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -1136,6 +1137,20 @@ const Siul2_Port_Ip_PinSettingsConfig g_pin_mux_InitConfigArr0[NUM_OF_CONFIGURED
         .driveStrength               = PORT_DRIVE_STRENTGTH_DISABLED,
         .pullConfig                  = PORT_INTERNAL_PULL_NOT_ENABLED,
         .slewRateCtrlSel             = PORT_SLEW_RATE_NOT_AVAILABLE,
+        .pullKeep                    = PORT_PULL_KEEP_DISABLED,
+        .invert                      = PORT_INVERT_DISABLED,
+        .inputBuffer                 = PORT_INPUT_BUFFER_DISABLED,
+        .outputBuffer                = PORT_OUTPUT_BUFFER_ENABLED,
+        .adcInterleaves              = { MUX_MODE_NOT_AVAILABLE, MUX_MODE_NOT_AVAILABLE },
+        .initValue                   = 2u
+    },
+    {
+        .base                        = IP_SIUL2,
+        .pinPortIdx                  = 49u,
+        .mux                         = PORT_MUX_AS_GPIO,
+        .safeMode                    = PORT_SAFE_MODE_DISABLED,
+        .inputFilter                 = PORT_INPUT_FILTER_NOT_AVAILABLE,
+        .pullConfig                  = PORT_INTERNAL_PULL_NOT_ENABLED,
         .pullKeep                    = PORT_PULL_KEEP_DISABLED,
         .invert                      = PORT_INVERT_DISABLED,
         .inputBuffer                 = PORT_INPUT_BUFFER_DISABLED,
